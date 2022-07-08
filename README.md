@@ -1,2 +1,2 @@
-# algebraic-topology-notes
-代数拓扑讨论班笔记
+# 代数拓扑讨论班笔记
+随缘写，写了什么算什么。
