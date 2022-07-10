@@ -1,7 +1,11 @@
 \documentclass[11pt]{article}
 
 \usepackage[fontset=none]{ctex}
-\setmainfont{XITS}
+\setmainfont[Extension={.otf},
+    UprightFont={*-Regular},
+    BoldFont={*-Bold},
+    ItalicFont={*-Italic},
+    BoldItalicFont={*-BoldItalic}]{STIXTwoText}
 \setCJKmainfont[BoldFont={FZCuSong-B09S},ItalicFont={FZKai-Z03S},BoldItalicFont={FZCuKaiS-R-GB}]{FZShuSong-Z01S}
 \setCJKsansfont{FZHei-B01S}
 \setCJKmonofont{FZFangSong-Z02S}
@@ -11,7 +15,7 @@
 \usepackage{amsthm}
 \usepackage{autobreak}
 \usepackage{unicode-math}
-\setmathfont{XITS Math}
+\setmathfont{STIX Two Math}
 \setmathfont{TeX Gyre Pagella Math}[range={bb,frak}]
 \usepackage[shortlabels]{enumitem}
 \setlist{nosep}
@@ -228,7 +232,8 @@ $1$--形式中的\textbf{闭形式}是指满足$\partial p/\partial x=\partial q
 我们先证明定理5.11.
 \begin{proof}
     设$I=[0,1]$是单位闭区间, $f:I\to Y$是同胚.
-    反设$\mathbb{R}^2\backslash Y$是不连通的, 即$\dim H^0(\mathbb{R}^2\backslash Y)\geq 2$.
+    反设$\mathbb{R}^2\backslash Y$是不连通的, 即
+    \[\dim H^0(\mathbb{R}^2\backslash Y)\geq 2\]
     取定两个在不同连通分支中的点$A,B$.
     设$Y$中与$\left[0,\frac{1}{2}\right]$同胚的部分为$Y^+$, 与$\left[\frac{1}{2},1\right]$同胚的部分为$Y^-$, $Y^+\cap Y^-=Q$.
     考虑Mayer-Vietoris序列
@@ -248,6 +253,34 @@ $1$--形式中的\textbf{闭形式}是指满足$\partial p/\partial x=\partial q
     设$\bigcap_{n=1}^\infty Y_n=\{P\}$.
     对$\mathbb{R}^2\backslash Y$任意两个不同连通分支中的点$A,B$, 由于$\mathbb{R}^2\backslash\{P\}$是连通的, 存在一条闭路径$\gamma$连接$A,B$.
     那么存在$P$的一个邻域$N$与$\gamma$不交, 但又存在充分大的$n$使得$Y_n\subset N$, 从而$\supp\gamma\subset\mathbb{R}^2\backslash Y_n$, 矛盾.
+\end{proof}
+
+\begin{proof}[{\bf Jordan曲线定理的证明}]
+    设$P,Q$是$X$上任意两点, 连接$P,Q$的两段闭弧记为$A,B$.
+    考虑对$U=\mathbb{R}^2\backslash A,V=\mathbb{R}^2\backslash B$的Mayer-Vietoris序列
+    \begin{align*}
+        H^0(\mathbb{R}^2\backslash A)\oplus H^0(\mathbb{R}^2\backslash B)&\xrightarrow{i^*-j^*}H^0(\mathbb{R}^2\backslash X)\xrightarrow{\delta}H^1(\mathbb{R}^2\backslash\{P,Q\})\\
+        &\xrightarrow{k^*\oplus l^*}H^1(\mathbb{R}^2\backslash A)\oplus H^1(\mathbb{R}^2\backslash B)
+    \end{align*}
+    由定理5.11, $\mathbb{R}^2\backslash A$与$\mathbb{R}^2\backslash B$是连通的, 所以$H^0(\mathbb{R}^2\backslash A)$与$H^0(\mathbb{R}^2\backslash B)$由常值函数构成.
+    对$\mathbb{R}^2\backslash A$与$\mathbb{R}^2\backslash B$上的常值函数$g,h$, 那么有$(i^*-j^*)(g,h)=g|_{\mathbb{R}^2\backslash X}-h|_{\mathbb{R}^2\backslash X}$为常值函数, 从而$\dim\im(i^*-j^*)=1$.
+    由正合可知$\dim\ker\delta=\dim\im(i^*-j^*)=1$.
+    而对于$k^*\oplus l^*$, 由于$H^1(\mathbb{R}^2\backslash\{P,Q\})=\left\langle[\omega_P],[\omega_Q]\right\rangle$, 而由命题5.3知在$\mathbb{R}^2\backslash A$上有$[\omega_P]=[\omega_Q]$, 在$\mathbb{R}^2\backslash B$上同理, 所以有$k^*\oplus l^*([\omega|_P])=k^*\oplus l^*([\omega|_Q])$.
+    因此$\dim\im k^*\oplus l^*=1$, 而$\dim H^1(\mathbb{R}^2\backslash\{P,Q\})=2$, 有
+    \begin{align*}
+        \dim\im\delta&=\dim\ker k^*\oplus l^*\\
+        &=\dim H^1(\mathbb{R}^2\backslash\{P,Q\})-\dim\im k^*\oplus l^*\\
+        &=1
+    \end{align*}
+    所以$\dim H^0(\mathbb{R}^2\backslash X)=\dim\ker\delta+\dim\im\delta=2$, 即$\mathbb{R}^2\backslash X$有两个连通分支, 显然一个有界而另一个无界.
+
+    我们证明最后一个断言.
+    对任意一点$T\in X$及$T$的邻域$N$, 在$N$中取两点$P,Q$, 设两点将$X$分的两段闭弧为$A,B$, 其中$A$在$N$内.
+    设$P_0,P_1$是$\mathbb{R}^2\backslash X$的两个不同连通分支中的点, 由于$\mathbb{R}^2\backslash B$是连通的, 所以存在闭路径$\gamma$连接这两点.
+    $\gamma$一定与$A$相交 (否则$X$将会连通), 且交点的集合是闭集, 那么设
+    \[t_m=\min_{t\in[0,1]}\{t|\ \gamma(t)\in A\},t_M=\max_{t\in[0,1]}\{t|\ \gamma(t)\in A\}\]
+    那么存在某个充分小的$\varepsilon$, 使得$\gamma(t_m-\varepsilon)$与$P_0$在同一连通分支而$\gamma(t_M+\varepsilon)$与$P_1$在同一连通分支, 且$\gamma(t_m-\varepsilon),\gamma(t_M+\varepsilon)$均在$N$中.
+    从而命题得证.
 \end{proof}
 
 \section{应用和变体}
