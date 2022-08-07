@@ -60,6 +60,13 @@ $1$--形式中的\textbf{闭形式}是指满足$\partial p/\partial x=\partial q
 \begin{env}{命题1.12}
     设$U$是两个有限或无限长的开区间的乘积, 那么在$U$上闭形式都是恰当形式.
 \end{env}
+
+我们之后需要一个更强的命题
+\begin{env}{Poincar\'{e}引理}
+    如果$U$中存在一点$P$, 使得任意$Q\in U$与$P$连接的线段均在$U$内 (即$U$是\textit{星形区域}), 那么$U$中的闭形式都是恰当形式.
+\end{env}
+
+证明参阅~\cite[定理4.11]{Spivak1965}.
 此外, 我们需要一个关于卷绕数的命题
 \begin{env}{命题3.16}
     设$\gamma$是闭路径, $\supp\gamma$是$\gamma$的图像,
@@ -274,172 +281,6 @@ $1$--形式中的\textbf{闭形式}是指满足$\partial p/\partial x=\partial q
     \[t_m=\min_{t\in[0,1]}\{t|\ \gamma(t)\in A\},t_M=\max_{t\in[0,1]}\{t|\ \gamma(t)\in A\}\]
     那么存在某个充分小的$\varepsilon$, 使得$\gamma(t_m-\varepsilon)$与$P_0$在同一连通分支而$\gamma(t_M+\varepsilon)$与$P_1$在同一连通分支, 且$\gamma(t_m-\varepsilon),\gamma(t_M+\varepsilon)$均在$N$中.
     从而命题得证.
-\end{proof}
-
-\section{应用和变体}
-
-我们选择5.4节的一些题目来讨论.
-本节需要用到一个 (现在还证不出来的) 结论:
-\begin{env}{命题.}\label{some H^1}
-    设$K$是平面上的非空紧集.
-    \begin{enumerate}[(a)]
-        \item 如果$K$是连通的, 那么$\dim H^1(\mathbb{R}^2\backslash K)=1$, 且$H^1(\mathbb{R}^2\backslash K)=\left\langle[\omega_P]\right\rangle$, 对任意$P\in K$;
-        \item 如果$K$不连通且$P,Q$在不同的连通分支中, 那么$[\omega_P]$与$[\omega_Q]$在$H^1(\mathbb{R}^2\backslash K)$中线性无关;
-        \item 如果$K$恰好有两个连通分支, 那么任取两个连通分支中的$P,Q$, 有$H^1(\mathbb{R}^2\backslash K)=\left\langle[\omega_P],[\omega_Q]\right\rangle$.
-    \end{enumerate}
-\end{env}
-
-习题5.13到习题5.16是证明Jordan曲线定理中处理$H^0$的技巧的一些应用.
-我们讨论一下习题5.13与习题5.14, 后面两道题与习题5.14类似.
-\begin{env}{习题5.13}
-    如果$A,B$是$\mathbb{R}^2$上的连通紧集, 且$A\cap B$非空而不连通, 证明$\mathbb{R}^2\backslash(A\cup B)$不连通.
-\end{env}
-\begin{proof}
-    我们需要承认一个事实 (\parencite[定理17.31]{Lee2013}):
-    平面上任意开集$U$的$H^2(U)$与$\mathbb{R}$同构.\footnote{这个命题是错误的, 所以本题的后半部分是伪证, 我们只想展示一下处理Mayer-Vietoris序列的思路.}
-
-    对原题用反证法, 假设$\mathbb{R}^2\backslash(A\cup B)$是连通的.
-    考虑Mayer-Vietoris序列
-    \begin{equation}
-        \begin{aligned}
-            H^1(\mathbb{R}^2\backslash(A\cap B))&\xrightarrow{k^*\oplus l^*}H^1(\mathbb{R}^2\backslash A)\oplus H^1(\mathbb{R}^2\backslash B)\to H^1(\mathbb{R}^2\backslash(A\cup B))\\
-            &\to H^2(\mathbb{R}^2\backslash(A\cap B))\to H^2(\mathbb{R}^2\backslash A)\oplus H^2(\mathbb{R}^2\backslash B)\\
-            &\to H^2(\mathbb{R}^2\backslash(A\cup B))\to 0
-        \end{aligned}\label{mv5.13}
-    \end{equation}
-    设$[\omega]\in\ker{k^*\oplus l^*}$, 那么在$\mathbb{R}^2\backslash A$与$\mathbb{R}^2\backslash B$上分别存在$f_1,f_2$使得
-    \[\omega|_A=\d{f_1},\omega|_B=\d{f_2}\]
-    由于我们假设$\mathbb{R}^2\backslash(A\cup B)$是连通的, $f_1,f_2$在重叠处是常值函数, 所以可以延拓为$\mathbb{R}^2\backslash(A\cup B)$上的函数$f$使得$\d{f}=\omega$, 那么就有$[\omega]=0$.
-    从而有$\ker{k^*\oplus l^*}=0$, 那么$k^*\oplus l^*$是单射.
-    而由本题前的命题,
-    \[\dim H^1(\mathbb{R}^2\backslash(A\cap B))\geq 2=\dim H^1(\mathbb{R}^2\backslash A)\oplus H^1(\mathbb{R}^2\backslash B)\]
-    所以$k^*\oplus l^*$是同构, 于是正合列~\eqref{mv5.13}~可以缩短为
-    \begin{align*}
-        0&\to H^1(\mathbb{R}^2\backslash(A\cup B))\to H^2(\mathbb{R}^2\backslash(A\cap B))\\
-        &\to H^2(\mathbb{R}^2\backslash A)\oplus H^2(\mathbb{R}^2\backslash B)\to H^2(\mathbb{R}^2\backslash(A\cup B))\to 0
-    \end{align*}
-    仍然由本题之前的命题, 上述正合列可以写为
-    \[0\to\mathbb{R}\to\mathbb{R}\to\mathbb{R^2}\to\mathbb{R}\to 0\]
-    比较维数容易知道这是不可能的.
-\end{proof}
-
-\begin{env}{习题5.14}
-    如果$Y$是平面上同胚于一个矩形或者闭圆盘的子集, 证明它的补是连通的.
-\end{env}
-\begin{proof}
-    由于闭圆盘和矩形是同胚的, 所以我们只需要对单位正方形证明这个命题.
-
-    设$I=[0,1]$是单位闭区间, $\varphi:I^2\to Y$是同胚.
-    反设$\mathbb{R}^2\backslash Y$是不连通的, 即
-    \[\dim H^0(\mathbb{R}^2\backslash Y)\geq 2\]
-    取定两个在不同连通分支中的点$A,B$.
-    设$Y$中与$\left[0,\frac{1}{2}\right]\times I$同胚的部分为$Y^+$, 与$\left[\frac{1}{2},1\right]\times I$同胚的部分为$Y^-$, $Y^+\cap Y^-=\varphi\left(\left\{\dfrac{1}{2}\right\}\times I\right):=X$.
-    考虑Mayer-Vietoris序列
-    \begin{align*}
-    H^0(\mathbb{R}^2\backslash Y^+)\oplus H^0(\mathbb{R}^2\backslash Y^-)&\longrightarrow H^0(\mathbb{R}^2\backslash Y)
-    \longrightarrow H^1(\mathbb{R}^2\backslash X)\\
-    &\longrightarrow H^1(\mathbb{R}^2\backslash Y^+)\oplus H^1(\mathbb{R}^2\backslash Y^-)
-    \end{align*}
-    我们证明了$H^1(\mathbb{R}^2\backslash X)$是连通的, 从而$H^1(\mathbb{R}^2\backslash X)=\left\langle[\omega_{Q}]\right\rangle$, 其中$Q$为$X$上任意一点.
-    而$\omega_{Q}|_{\mathbb{R}^2\backslash Y^+}$与$\omega_{Q}|_{\mathbb{R}^2\backslash Y^-}$均为非零的闭形式, 所以$k^*\oplus l^*$是单射.
-    因此有$\im\delta=\ker(k^*\oplus l^*)=0$, 那么有正合列
-    \[H^0(\mathbb{R}^2\backslash Y^+)\oplus H^0(\mathbb{R}^2\backslash Y^-)\xrightarrow{i^*-j^*} H^0(\mathbb{R}^2\backslash Y)\xrightarrow{\delta}0\]
-    说明$i^*-j^*$是满射. 对某个在$A,B$处取值不同的$f\in H^0(\mathbb{R}^2\backslash Y)$, 存在$g\in H^0(\mathbb{R}^2\backslash Y^+),h\in H^0(\mathbb{R}^2\backslash Y^-)$使得$g|_{\mathbb{R}^2\backslash Y}-h|_{\mathbb{R}^2\backslash Y}=f$.
-    如果$g,h$均在$A,B$处取值相等, 可以推出$f$在$A,B$处取值相等, 矛盾.
-    所以$A,B$在$H^0(\mathbb{R}^2\backslash Y^+)$或$H^0(\mathbb{R}^2\backslash Y^+)$的两个不同连通分支中, 设满足的那个为$\mathbb{R}^2\backslash Y_1$.
-    依次构造下去, 我们可以得到一个集合列
-    \[Y=Y_0\supset Y_1\supset\cdots\supset Y_n\supset\cdots\]
-    设$\bigcap_{n=1}^\infty Y_n=X_1\cong I$.
-    对$\mathbb{R}^2\backslash Y$任意两个不同连通分支中的点$A,B$, 由于$\mathbb{R}^2\backslash X_1$是连通的, 存在一条闭路径$\gamma$连接$A,B$.
-    那么存在$X_1$的一个邻域$N$与$\gamma$不交 (T4公理), 但又存在充分大的$n$使得$Y_n\subset N$, 从而$\supp\gamma\subset\mathbb{R}^2\backslash Y_n$, 矛盾.
-\end{proof}
-
-
-以下是Jordan曲线定理的一个重要推论: $2$维情况的区域不变定理.
-\begin{env}{命题5.17}
-    设$D$是闭圆盘, 记$D^\circ$为其内部, $C$为其边界圆.
-    设$f:D\to\mathbb{R}^2$是连续的单射, 那么$\mathbb{R}^2\backslash f(C)$有两个连通分支, 分别为
-    \[f(D^\circ)\quad\text{与}\quad\mathbb{R}^2\backslash f(D)\]
-    特别地, $f(D^\circ)$是平面上的一个开集.
-\end{env}
-\begin{proof}
-    对紧集而言, 连续的单射是它与它的像之间的同胚.
-    因此对$f(C)$用Jordan曲线定理, 可知$\mathbb{R}^2\backslash f(C)$有两个连通分支.
-    注意到$\mathbb{R}^2=f(D^\circ)\coprod f(C)\coprod f(\mathbb{R}^2)\backslash f(D)$, 并且由同胚保持连通性可知$f(D^\circ)$是连通的, 而习题5.14保证$f(\mathbb{R}^2)\backslash f(D)$是连通的, 所以$f(D^\circ)\quad$与$\quad\mathbb{R}^2\backslash f(D)$恰好是$\mathbb{R}^2\backslash f(C)$的两个不同连通分支.
-    并且由同胚容易知道$f(D^\circ)$是开集.
-\end{proof}
-
-\begin{env}{推论5.18}(区域不变定理)
-    如果$U$是平面上的开集, $F:U\to\mathbb{R}^2$是连续的双射, 那么$F(U)$是$\mathbb{R}^2$的开子集, 且$F$是$U$到$F(U)$的一个同胚.
-\end{env}
-\begin{proof}
-    设$V\subset U$是开集.
-    对任意一点$p\in V$, 取以$p$为圆心的开圆盘$C(p)\subset V$, 那么由命题5.17, 可知$F(C(p))\subset F(V)$也是开集, 从而$F(V)$是一个开集.
-    那么因此有$F^{-1}$连续, 从而是同胚.
-    特别地, $F(U)$是平面上的一个开集.
-\end{proof}
-
-利用Jordan曲线定理可以给出第4章中的一个结论的另一证明.
-\begin{env}{推论5.19}
-    $2$维球面不同胚于平面的任何子集.
-\end{env}
-\begin{proof}
-    设$f:S^2\to\mathbb{R}^2$是连续的单射 (从而是$S^2$与$f(S^2)$之间的同胚), $A,B$分别是上半球面与下半球面, $A\cap B=C$.
-    注意到而$f(A^\circ)\subset f(A)$, 所以$f(A^\circ)$被映为$\mathbb{R}^2\backslash f(C)$的有界连通分支.
-    同理$f(B^\circ)$也被映为$\mathbb{R}^2\backslash f(C)$的有界连通分支, 这与$f$是单射矛盾.
-\end{proof}
-
-\begin{env}{命题5.20}
-    设$F:C\to\mathbb{R}^2$是连续的双射, 那么对$\mathbb{R}^2\backslash F(C)$的有界连通分支中的任一点$P$有$W(F,P)=\pm 1$.
-    (书上的证明似乎有问题.)
-\end{env}
-
-问题5.21到问题5.23是有关平面图的问题, 可以参阅~\parencite{Bondy-Murty2008}~相关章节.
-
-\begin{env}{习题5.24}
-    证明定理5.11, Jordan曲线定理以及Euler公式在$2$维球面上也成立.
-    (不考虑有界性的描述.)
-\end{env}
-\begin{proof}
-    实际上只需要证明一个命题: 设$X$是局部紧的Hausdorff空间, $\widetilde{X}$是$X$的单点紧化空间, 如果$X$连通且非紧, 那么$\widetilde{X}$是连通的.
-
-    假设$\widetilde{X}$不连通, 那么存在非空的开集$U,V$使得$U\coprod V=\widetilde{X}$.
-    $\infty$必然在这两个开集之一之中, 不妨设$\infty\in U$.
-    那么一定有$V=\widetilde{X}\backslash U$在$X$中是紧集.
-    但是$V$在$\widetilde{X}$中开意味着$V$在$X$中开, 而Hausdorff空间中的紧集不可能是开集, 矛盾.
-\end{proof}
-
-最后我们讨论两个关于M\"{o}bius带的问题.
-记$I=[0,1]$, 定义等价关系$\sim:(0,y)\sim(1,1-y)$, 并定义M\"{o}bius带为商空间$\mathcal{M}:=I^2/\sim$.
-\begin{env}{问题5.26}
-    证明不存在M\"{o}bius带到平面的连续双射.
-\end{env}
-\begin{proof}
-    考虑$\mathcal{M}\backslash C:=(I^2\backslash(I\times\{1/2\}))/\sim$, 那么去掉的部分$C$相当于将$I$的端点粘合在一起得到单位圆周$S^1$.
-    容易证明$\mathcal{M}\backslash C$是道路连通的.
-    如果$\varphi:\mathcal(M)\to\mathbb{R}^2$是连续双射, 那么$f(C)$与$S^1$同胚, 由Jordan曲线定理, $\mathbb{R}^2\backslash f(C)$有两个连通分支, 并且由于$f(C)\subset f(\mathcal{M})$, 有界的连通分支在$f(\mathcal{M})$中, 从而$f(\mathcal{M})$不连通.
-    但是$\mathcal{M}\backslash C$连通, 且连续映射保持连通性, 矛盾.
-    所以不存在M\"{o}bius带到平面的连续双射.
-\end{proof}
-{\itshape 还有一种微分几何的做法是考虑M\"{o}bius带作为微分流形的定向.}
-
-\begin{env}{问题5.28}
-    一个\textbf{带边的拓扑曲面}是指一个第二可数的Hausdorff空间, 满足对任意一点$P$, 都存在$P$的一个邻域同胚于平面或上半平面$\mathbb{H}^2=\{(x,y)\in\mathbb{R}^2|\ x\geq 0\}$中的一个开集.
-    如果这个同胚是到$\mathbb{H}^2$的且将$P$映为$x$轴上的点, 则称$P$为\textbf{边界点}, 否则称为\textbf{内点}\footnote{这里对带边拓扑流形的定义是更加现代的定义, 与书上略微不同}.
-    证明同胚的带边曲面有着同胚的边界 (即边界点的集合), 从而M\"{o}bius带与圆柱面不同胚.
-\end{env}
-\begin{proof}
-    证明很简单, 验证定义即可.
-    设$M,N$是带边流形, $f:M\to N$是同胚映射, 不妨假设$M,N$有非空的边界.
-    对$p\in\partial M$, 存在一个坐标卡$\varphi:U\to\mathbb{H}^2$使得$U$包含$p$, 且$\varphi(U)$是$\mathbb{H}^2$的开子集, $\varphi(p)$在$x$轴上.
-    那么对$f(p)$的邻域$V=f(U)$, $\varphi\circ f^{-1}$是一个坐标卡, 并且将$f(p)$映到$x$轴上, 从而$f(p)\in\partial N$.
-    因此$f$ (以及同理的$f^{-1}$) 将边界映为边界.
-    对于$\partial M$上的一个开集$A$, 存在$M$的开集$B$使得$A=B\cap\partial M$, 那么一定有
-    \[f(A)=f(B\cap\partial M)=f(B)\cap f(\partial M)=f(B)\cap\partial N\]
-    所以$f(A)$是$\partial N$中的开集, 从而$f^{-1}$连续.
-    同理$f$连续, 所以$f:\partial M\to\partial N$是同胚映射.
-
-    至于M\"{o}bius带, 它的边界为$S^1$, 而圆锥$S^1\times I$的边界为$S^1\coprod S^1$, 两者不同胚 (因为连通分支数不同), 所以M\"{o}bius带与圆柱面不同胚.
 \end{proof}
 
 \printbibliography[title={参考文献}]
